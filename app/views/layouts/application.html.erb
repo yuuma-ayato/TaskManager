@@ -10,7 +10,7 @@
   </head>
   <body>
     <% flash.each do |key, value| %>
-      <%= content_tag :div, value, class: "flash flash-#{key}" %>
+      <%= content_tag :div, value, class: "flash time-limit flash-#{key}" %>
     <% end %>
     <header class="clearfix">
       <h1 id="header_logo">TaskManager</h1>
