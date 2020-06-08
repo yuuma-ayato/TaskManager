@@ -10,8 +10,11 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(get_task_params)
-    @task.save
-    redirect_to tasks_path
+    if @task.save
+      redirect_to tasks_path, notice:"新しいタスクを作成しました"
+    else
+      render :new
+    end
   end
 
   def show
@@ -21,8 +24,11 @@ class TasksController < ApplicationController
   end
 
   def update
-    @task.update(get_task_params)
-    redirect_to tasks_path
+    if @task.update(get_task_params)
+      redirect_to tasks_path, notice:"タスクを編集しました"
+    else
+      render :edit
+    end
   end
 
   def destroy

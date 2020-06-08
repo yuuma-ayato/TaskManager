@@ -9,6 +9,9 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
+    <% flash.each do |key, value| %>
+      <%= content_tag :div, value, class: "flash flash-#{key}" %>
+    <% end %>
     <header class="clearfix">
       <h1 id="header_logo">TaskManager</h1>
       <ul class="header_nav">
