@@ -8,6 +8,7 @@
         <td><%= link_to task_path(task.id), remote: true do %>
           <%= task.content %>
         <% end %></td>
+        <td><%= link_to "Edit", edit_task_path(task.id), remote: true %></td>
       </tr>
     <% end %>
   </table>
