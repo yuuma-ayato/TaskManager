@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i(show)
+  before_action :set_task, only: %i(show edit update)
   def index
     @tasks = Task.all.order(created_at: :DESC)
   end
@@ -15,6 +15,14 @@ class TasksController < ApplicationController
   end
 
   def show
+  end
+
+  def edit
+  end
+
+  def update
+    @task.update(get_task_params)
+    redirect_to tasks_path
   end
 
   private
