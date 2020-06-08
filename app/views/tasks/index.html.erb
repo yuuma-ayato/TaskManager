@@ -4,11 +4,10 @@
     <th>content</th>
   </tr>
   <% @tasks.each do |task| %>
-    <tr class="modal-open">
-      <td><%= task.content %></td>
+    <tr>
+      <td><%= link_to task_path(task.id), remote: true do %>
+        <%= task.content %>
+      <% end %></td>
     </tr>
   <% end %>
 </table>
-<div id="modal-main">テスト</div>
-
-</div>
