@@ -1,5 +1,17 @@
 <div class="modal-dialog">
   <div class="modal-content">
-    新規作成
+    <%= form_with(model:@task, local: true) do |form| %>
+      <% if @task.errors.any? %>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+      <% end %>
+
+      <%= form.label :content %>
+      <%= form.text_field :content %>
+      <%= form.label :detail %>
+      <%= form.text_area :detail %>
+      <%= form.submit "Create New Task" %>
+    <% end %>
   </div>
 </div>
