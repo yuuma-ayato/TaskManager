@@ -17,7 +17,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require bootstrap/dist/js/bootstrap.min
-
-$(function(){
-  setTimeout("$('.time-limit').fadeOut('slow')", 1000)
-})
