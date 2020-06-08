@@ -11,7 +11,11 @@
       <%= form.text_field :content %>
       <%= form.label :detail %>
       <%= form.text_area :detail %>
-      <%= form.submit "Create New Task" %>
+      <% if controller.action_name == "edit" || controller.action_name == "update" %>
+        <%= form.submit "Complete Edit" %>
+      <% else %>
+        <%= form.submit "Create New Task" %>
+      <% end %>
     <% end %>
   </div>
 </div>
