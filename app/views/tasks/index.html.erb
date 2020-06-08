@@ -4,8 +4,11 @@
     <th>content</th>
   </tr>
   <% @tasks.each do |task| %>
-    <tr>
+    <tr class="modal-open">
       <td><%= task.content %></td>
     </tr>
   <% end %>
 </table>
+<div id="modal-main">テスト</div>
+
+</div>
