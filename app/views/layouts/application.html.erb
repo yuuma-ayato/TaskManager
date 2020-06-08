@@ -12,8 +12,8 @@
     <header class="clearfix">
       <h1 id="header_logo">TaskManager</h1>
       <ul class="header_nav">
-        <li><%= link_to '+New', new_task_path, remote:true %> </li>
-        <li class="sort"><%= link_to 'Sort', new_task_path, remote:true %> </li>
+        <li><%= link_to '+New', new_task_path, remote:true, class:"btn btn-primary" %> </li>
+        <li class="sort"><%= link_to 'Sort', new_task_path, remote:true, class:"btn btn-primary" %> </li>
       </ul>
     </header>
     <%= yield %>
