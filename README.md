@@ -10,7 +10,7 @@ has_many :tasks, dependent: :destroy
 -|Column|Type|Options|
 -|------|----|-------|
 -|user_id|references|null: false, foreign_key: true|
--|content|string|null: false, limit: 150|
+-|content|string|null: false, limit: 50|
 -|comment|text|limit: 255|
 -|priority|enum|null: false, default: "通常"|
 -|status|enum|null: false, default: "未着手"|
