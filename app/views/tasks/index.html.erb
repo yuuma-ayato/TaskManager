@@ -9,6 +9,7 @@
           <%= task.content %>
         <% end %></td>
         <td><%= link_to "Edit", edit_task_path(task.id), remote: true %></td>
+        <td><%= link_to "Delete", task_path(task.id), method: :delete %></td>
       </tr>
     <% end %>
   </table>

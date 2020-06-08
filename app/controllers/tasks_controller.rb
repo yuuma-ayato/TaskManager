@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i(show edit update)
+  before_action :set_task, only: %i(show edit update destroy)
   def index
     @tasks = Task.all.order(created_at: :DESC)
   end
@@ -22,6 +22,11 @@ class TasksController < ApplicationController
 
   def update
     @task.update(get_task_params)
+    redirect_to tasks_path
+  end
+
+  def destroy
+    @task.destroy
     redirect_to tasks_path
   end
 
