@@ -1,0 +1,21 @@
+<div class="modal-dialog">
+  <div class="modal-content">
+    <%= form_with(model:@task, remote: true) do |form| %>
+      <% if @task.errors.any? %>
+          <% @task.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+      <% end %>
+
+      <p><%= form.label :content %></p>
+      <p><%= form.text_field :content, class:"form" %></p>
+      <p><%= form.label :detail %></p>
+      <p><%= form.text_area :detail, class:"form" %></p>
+      <% if controller.action_name == "edit" || controller.action_name == "update" %>
+        <%= form.submit "Complete Edit", class: "btn btn-primary" %>
+      <% else %>
+        <%= form.submit "Create New Task", class: "btn btn-primary" %>
+      <% end %>
+    <% end %>
+  </div>
+</div>

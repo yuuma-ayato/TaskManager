@@ -1,0 +1,17 @@
+<div class="container">
+  <table class="task_table">
+    <tr>
+      <th>content</th>
+    </tr>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= link_to task_path(task.id), remote: true do %>
+          <%= task.content %>
+        <% end %></td>
+        <td><%= link_to "Edit", edit_task_path(task.id), remote: true %></td>
+        <td><%= link_to "Delete", task_path(task.id), method: :delete %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
+<div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>
