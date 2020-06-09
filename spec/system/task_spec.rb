@@ -33,25 +33,31 @@ RSpec.describe 'Tasks', type: :system do
         expect(page).to have_content 'タスクデータが保存されるかテストする'
         # テストコードで作成したデータのcontentの表示をクリックして詳細ウィンドウを表示する
         click_link 'タスクデータが保存されるかテストする'
-        # 詳細ウィンドウにテストコードで作成したデータがhave_contentされているかを確認する
-        expect(page).to have_content 'タスクデータが保存されるかテストする'
-        expect(page).to have_content 'System　Specを使って必要項目を入力してcreateボタンを押した場合正しく保存されるかテストしている'
+        # 詳細ウィンドウ内の検証
+        within('.modal') do
+          # 詳細ウィンドウにテストコードで作成したデータがhave_contentされているかを確認する
+          expect(page).to have_content 'タスクデータが保存されるかテストする'
+          expect(page).to have_content 'System　Specを使って必要項目を入力してcreateボタンを押した場合正しく保存されるかテストしている'
+        end
       end
     end
   end
   describe 'タスク詳細画面' do
-     context '任意のタスク詳細画面に遷移した場合' do
-       it '該当タスクの内容が表示されたページに遷移する' do
-         # テストに使用するタスクデータを作成
-         task = FactoryBot.create(:task, content: 'test_show_content', detail: 'test_show_detail')
-         # タスク一覧画面に遷移
-         visit tasks_path
-         # 作成したタスクデータのcontentの表示をクリック
-         # 該当タスクの詳細ウィンドウが表示される
-         click_link 'test_show_content'
-         # 詳細ウィンドウに該当タスクのcontent,detailがhave_contentされているかを確認する
-         expect(page).to have_content 'test_show_content'
-         expect(page).to have_content 'test_show_detail'
+    context '任意のタスク詳細画面に遷移した場合' do
+      it '該当タスクの内容が表示されたページに遷移する' do
+        # テストに使用するタスクデータを作成
+        task = FactoryBot.create(:task, content: 'test_show_content', detail: 'test_show_detail')
+        # タスク一覧画面に遷移
+        visit tasks_path
+        # 作成したタスクデータのcontentの表示をクリック
+        # 該当タスクの詳細ウィンドウが表示される
+        click_link 'test_show_content'
+        # 詳細ウィンドウ内の検証
+        within('.modal') do
+          # 詳細ウィンドウに該当タスクのcontent,detailがhave_contentされているかを確認する
+          expect(page).to have_content 'test_show_content'
+          expect(page).to have_content 'test_show_detail'
+        end
        end
      end
   end
