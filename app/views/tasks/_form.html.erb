@@ -7,14 +7,14 @@
           <% end %>
       <% end %>
 
-      <%= form.label :content %>
-      <%= form.text_field :content %>
-      <%= form.label :detail %>
-      <%= form.text_area :detail %>
+      <p><%= form.label :content %></p>
+      <p><%= form.text_field :content, class:"form" %></p>
+      <p><%= form.label :detail %></p>
+      <p><%= form.text_area :detail, class:"form" %></p>
       <% if controller.action_name == "edit" || controller.action_name == "update" %>
-        <%= form.submit "Complete Edit" %>
+        <%= form.submit "Complete Edit", class: "btn btn-primary" %>
       <% else %>
-        <%= form.submit "Create New Task" %>
+        <%= form.submit "Create New Task", class: "btn btn-primary" %>
       <% end %>
     <% end %>
   </div>
