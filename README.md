@@ -38,29 +38,3 @@ belongs_to :label
 |color|string|null:false, default: "#ffffff"|
 ### Association
 has_many :tasks, through :tasks_labels
-
-## herokuへのデプロイ方法
-1. herokuにログインする  
-```
-heroku login
-```
-任意のキーを押すとブラウザが立ち上がりログイン画面が表示されるので、ログインする。  
-1. heroku上にアプリを新規作成  
-```
-heroku create アプリ名
-```
-アプリ名は空欄にすると自動生成される。heroku上の他のアプリと重複できない。  
-1. プリコンパイル
-```
-bundle exec rails assets:precompile RAILS_ENV=production
-```
-1. herokuにデプロイ  
-```
-git add -A
-git commit -m "コミットメッセージ"
-git push heroku master
-```
-1. データーベースのマイグレーション
-```
-heroku run rails db:migrate
-```
