@@ -4,7 +4,7 @@
       <th>content</th>
     </tr>
     <% @tasks.each do |task| %>
-      <tr>
+      <tr class="task_row">
         <td><%= link_to task_path(task.id), remote: true do %>
           <%= task.content %>
         <% end %></td>
