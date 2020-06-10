@@ -1,4 +1,8 @@
 # TaskManager
+## バージョン情報
+-ruby 2.6.5p114  
+-Rails 5.2.4.3  
+-psql (PostgreSQL) 12.3  
 
 ## usersテーブル
 |Column|Type|Options|
