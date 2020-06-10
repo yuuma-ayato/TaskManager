@@ -1,15 +1,15 @@
 <div class="container">
   <table class="task_table">
     <tr>
-      <th>content</th>
+      <th>内容</th>
     </tr>
     <% @tasks.each do |task| %>
       <tr class="task_row">
         <td><%= link_to task_path(task.id), remote: true do %>
           <%= task.content %>
         <% end %></td>
-        <td><%= link_to "Edit", edit_task_path(task.id), remote: true %></td>
-        <td><%= link_to "Delete", task_path(task.id), method: :delete %></td>
+        <td><%= link_to "編集", edit_task_path(task.id), remote: true %></td>
+        <td><%= link_to "削除", task_path(task.id), method: :delete %></td>
       </tr>
     <% end %>
   </table>
