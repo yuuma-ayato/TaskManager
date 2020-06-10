@@ -47,6 +47,7 @@ RSpec.describe 'Tasks', type: :system do
         visit tasks_path
         # 「+New」のリンクをクリックし、タスク新規作成フォームを表示
         click_link '+New'
+        sleep 3
         # contentというラベル名の入力欄と、detailというラベル名の入力欄に
         # タスクの内容と詳細をそれぞれfill_in(入力)する
         fill_in '内容', with: 'タスクデータテスト'
