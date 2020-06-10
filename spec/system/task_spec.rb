@@ -49,18 +49,18 @@ RSpec.describe 'Tasks', type: :system do
         click_link '+New'
         # contentというラベル名の入力欄と、detailというラベル名の入力欄に
         # タスクの内容と詳細をそれぞれfill_in(入力)する
-        fill_in '内容', with: 'タスクデータが保存されるかテストする'
+        fill_in '内容', with: 'タスクデータテスト'
         fill_in '詳細', with: 'System　Specを使って必要項目を入力してcreateボタンを押した場合正しく保存されるかテストしている'
         #「Create New Task」というvalueのあるボタンをclick_on(クリック)する
         click_button 'Create New Task'
         # タスク一覧ページにテストコードで作成したデータがhave_contentされているかを確認する
-        expect(page).to have_content 'タスクデータが保存されるかテストする'
+        expect(page).to have_content 'タスクデータテスト'
         # テストコードで作成したデータのcontentの表示をクリックして詳細ウィンドウを表示する
-        click_link 'タスクデータが保存されるかテストする'
+        click_link 'タスクデータテスト'
         # 詳細ウィンドウ内の検証
         within('.modal') do
           # 詳細ウィンドウにテストコードで作成したデータがhave_contentされているかを確認する
-          expect(page).to have_content 'タスクデータが保存されるかテストする'
+          expect(page).to have_content 'タスクデータテスト'
           expect(page).to have_content 'System　Specを使って必要項目を入力してcreateボタンを押した場合正しく保存されるかテストしている'
         end
       end
