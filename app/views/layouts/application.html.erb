@@ -19,21 +19,24 @@
         $('.time-limit').fadeOut(1500);
       });
     </script>
-    <header class="clearfix">
+    <header>
       <h1 id="header_logo">TaskManager</h1>
       <ul class="header_nav">
         <li class="nav_new"><%= link_to '+New', new_task_path, remote:true, class:"btn btn-primary" %> </li>
-        <li class="nav_sort dropdown">
-          <button class="btn btn-primary dropdown-toggle sort_button"
-          type="button" id="dropdownMenu1" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-            Sort
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-           <%= link_to '作成日時', tasks_path, class:"dropdown-item" %>
-           <%= link_to '終了期限', tasks_path(sort: "limit"), class:"dropdown-item sort_limit" %>
-          </div>
-        </li>
+        <div class="right">
+          <li class="nav_search"><%= link_to 'Search', new_task_path, remote:true, class:"btn btn-primary" %></li>
+          <li class="nav_sort dropdown">
+            <button class="btn btn-primary dropdown-toggle"
+            type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+              Sort
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <%= link_to '作成日時', tasks_path, class:"dropdown-item" %>
+              <%= link_to '終了期限', tasks_path(sort: "limit"), class:"dropdown-item sort_limit" %>
+            </div>
+          </li>
+        </div>
       </ul>
     </header>
     <%= yield %>

@@ -19,7 +19,7 @@ h1 {
 
 header {
   height: 70px;
-  width: 80%;
+  width: 85%;
 }
 .container {
   background-color: rgb(255, 255, 255);
@@ -32,12 +32,12 @@ header {
 
 #header_logo {
   float:left;
+  display: inline-block;
   padding-top: 10px;
 }
-
-.header_nav {
-  display: flex;
-  flex-flow: row;
+.nav_new {
+  display: inline-block;
+  padding-left: 20px;
 }
 
 .nav_new a{
@@ -45,12 +45,12 @@ header {
   font-size: 2rem;
 }
 
-.nav_sort {
-  margin-left: auto;
+.right {
+  float: right;
 }
-
-.sort_button {
-  font-size: 2rem;
+.right li {
+  float:left;
+  padding: 20px 10px;
 }
 
 .task_table {
