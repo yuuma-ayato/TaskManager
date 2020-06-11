@@ -43,7 +43,7 @@ class TasksController < ApplicationController
   end
 
   def get_task_params
-    params.require(:task).permit(:content,:detail,:limit)
+    params.require(:task).permit(:content,:detail,:limit,:status)
   end
 
   def sorted_tasks
