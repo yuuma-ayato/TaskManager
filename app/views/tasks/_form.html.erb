@@ -11,6 +11,8 @@
       <p><%= form.text_field :content, class:"form" %></p>
       <p><%= form.label :detail %></p>
       <p><%= form.text_area :detail, class:"form" %></p>
+      <p><%= form.label :limit %></p>
+      <p><%= form.datetime_select :limit %></p>
       <% if controller.action_name == "edit" || controller.action_name == "update" %>
         <%= form.submit class: "btn btn-primary" %>
       <% else %>
