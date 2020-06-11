@@ -4,7 +4,8 @@ html {
 
 body {
   min-height: 100%;
-  background-color: rgb(118, 180, 199);
+  background-image: url("/assets/bg.jpg");
+  background-size: cover;
 }
 
 ul {
@@ -23,29 +24,51 @@ header {
 .container {
   background-color: rgb(255, 255, 255);
   margin: 20px auto;
-  width: 60%;
+  width: 70%;
   padding: 20px;
   border-radius: 10px;
+  box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 
 #header_logo {
   float:left;
+  padding-top: 10px;
 }
 
 .header_nav {
   display: flex;
   flex-flow: row;
-  line-height: 70px;
 }
 
 .header_nav li a{
   color: rgb(255, 255, 255);
   font-size: 2rem;
-  padding: 20px;
 }
 
 .sort {
   margin-left: auto
+}
+
+.task_table {
+  width: 100%;
+}
+
+.index_content {
+  width: 50%;
+}
+
+.index_limit {
+  width: 15%;
+  text-align: center;
+  background-color: rgb(241, 255, 210);
+}
+
+.index_menu {
+  width: 3%;
+}
+
+.task_table th {
+  text-align: center;
 }
 
 .task_table td {
