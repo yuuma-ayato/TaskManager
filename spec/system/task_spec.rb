@@ -4,12 +4,12 @@ FactoryBot.define do
   factory :task1, class: Task do
     content { 'デフォルトの内容1' }
     detail { 'デフォルトの詳細1' }
-    limit { DateTime.new(2020,8,20,00,00,00) }
+    limit { DateTime.new(2020,10,20,00,00,00) }
   end
   factory :task2, class: Task do
     content { 'デフォルトの内容2' }
     detail { 'デフォルトの詳細2' }
-    limit { DateTime.new(2020,10,01,00,00,00) }
+    limit { DateTime.new(2020,8,01,00,00,00) }
   end
   factory :task3, class: Task do
     content { 'デフォルトの内容3' }
@@ -50,9 +50,9 @@ RSpec.describe 'Tasks', type: :system do
         FactoryBot.create(:task3)
         visit tasks_path(sort:"limit")
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'デフォルトの内容1'
-        expect(task_list[1]).to have_content 'デフォルトの内容2'
-        expect(task_list[2]).to have_content 'デフォルトの内容3'
+        expect(task_list[0]).to have_content 'デフォルトの内容3'
+        expect(task_list[1]).to have_content 'デフォルトの内容1'
+        expect(task_list[2]).to have_content 'デフォルトの内容2'
       end
     end
   end
