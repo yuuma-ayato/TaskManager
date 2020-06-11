@@ -11,3 +11,8 @@ ja:
       user:
         name: 名前
         email: メールアドレス
+  helpers:
+    submit:
+      create: 登録する
+      update: 更新する
+      submit: 保存する
