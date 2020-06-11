@@ -3,7 +3,7 @@
     <p class="show_content"><%= @task.content %></p>
     <p class="show_detail"><%= @task.detail %></p>
     <% if @task.limit %>
-      <p class="show_limit">終了期限:<%= @task.limit %></p>
+      <p class="show_limit">終了期限:<%= l @task.limit, format: :long %></p>
     <% end %>
   </div>
 </div>
