@@ -4,10 +4,17 @@ FactoryBot.define do
   factory :task1, class: Task do
     content { 'デフォルトの内容1' }
     detail { 'デフォルトの詳細1' }
+    limit { DateTime.new(2020,8,20,00,00,00) }
   end
   factory :task2, class: Task do
     content { 'デフォルトの内容2' }
-    detail { 'デフォルトの詳細2'}
+    detail { 'デフォルトの詳細2' }
+    limit { DateTime.new(2020,10,01,00,00,00) }
+  end
+  factory :task3, class: Task do
+    content { 'デフォルトの内容3' }
+    detail { 'デフォルトの詳細3' }
+    limit { DateTime.new(2020,11,15,00,00,00) }
   end
 end
 
@@ -32,11 +39,20 @@ RSpec.describe 'Tasks', type: :system do
     end
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいる' do
-        new_task = FactoryBot.create(:task2)
+        FactoryBot.create(:task2)
         visit tasks_path
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'デフォルトの内容2'
         expect(task_list[1]).to have_content 'デフォルトの内容1'
+      end
+      it 'タスクが終了期限の降順に並んでいる' do
+        FactoryBot.create(:task2)
+        FactoryBot.create(:task3)
+        visit tasks_path(sort:"limit")
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'デフォルトの内容1'
+        expect(task_list[1]).to have_content 'デフォルトの内容2'
+        expect(task_list[2]).to have_content 'デフォルトの内容3'
       end
     end
   end
@@ -47,13 +63,13 @@ RSpec.describe 'Tasks', type: :system do
         visit tasks_path
         # 「+New」のリンクをクリックし、タスク新規作成フォームを表示
         click_link '+New'
-        sleep 3
+        sleep 1
         # contentというラベル名の入力欄と、detailというラベル名の入力欄に
         # タスクの内容と詳細をそれぞれfill_in(入力)する
         fill_in '内容', with: 'タスクデータテスト'
         fill_in '詳細', with: 'System　Specを使って必要項目を入力してcreateボタンを押した場合正しく保存されるかテストしている'
         #「Create New Task」というvalueのあるボタンをclick_on(クリック)する
-        click_button 'Create New Task'
+        click_button '登録'
         # タスク一覧ページにテストコードで作成したデータがhave_contentされているかを確認する
         expect(page).to have_content 'タスクデータテスト'
         # テストコードで作成したデータのcontentの表示をクリックして詳細ウィンドウを表示する

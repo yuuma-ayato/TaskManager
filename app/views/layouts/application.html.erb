@@ -7,6 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/45ec1eb6b9.js" crossorigin="anonymous"></script>
   </head>
   <body>
     <% flash.each do |key, value| %>
@@ -21,8 +22,18 @@
     <header class="clearfix">
       <h1 id="header_logo">TaskManager</h1>
       <ul class="header_nav">
-        <li><%= link_to '+New', new_task_path, remote:true, class:"btn btn-primary" %> </li>
-        <li class="sort"><%= link_to 'Sort', new_task_path, remote:true, class:"btn btn-primary" %> </li>
+        <li class="nav_new"><%= link_to '+New', new_task_path, remote:true, class:"btn btn-primary" %> </li>
+        <li class="nav_sort dropdown">
+          <button class="btn btn-primary dropdown-toggle sort_button"
+          type="button" id="dropdownMenu1" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">
+            Sort
+          </button>
+          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+           <%= link_to '作成日時', tasks_path, class:"dropdown-item" %>
+           <%= link_to '終了期限', tasks_path(sort: "limit"), class:"dropdown-item sort_limit" %>
+          </div>
+        </li>
       </ul>
     </header>
     <%= yield %>

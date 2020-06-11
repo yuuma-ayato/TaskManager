@@ -21,7 +21,7 @@ has_many :tasks, dependent: :destroy
 |detail|text|limit: 255|
 |priority|enum|null: false, default: "通常"|
 |status|enum|null: false, default: "未着手"|
-|limit|timestamp|
+|limit|datetime|
 ### Association
 belongs_to :user
 has_many :labels, through :tasks_labels

@@ -8,6 +8,7 @@ ja:
       task:
         content: 内容
         detail: 詳細
+        limit: 終了期限
       user:
         name: 名前
         email: メールアドレス

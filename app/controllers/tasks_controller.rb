@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
   def index
-    @tasks = Task.all.order(created_at: :DESC)
+      @tasks = sorted_tasks
   end
 
   def new
@@ -43,6 +43,15 @@ class TasksController < ApplicationController
   end
 
   def get_task_params
-    params.require(:task).permit(:content,:detail)
+    params.require(:task).permit(:content,:detail,:limit)
+  end
+
+  def sorted_tasks
+    case params[:sort]
+    when "limit"
+      Task.all.order(limit: :DESC)
+    else
+      Task.all.order(created_at: :DESC)
+    end
   end
 end
