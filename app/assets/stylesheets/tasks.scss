@@ -67,12 +67,18 @@ header {
   background-color: rgb(241, 255, 210);
 }
 
+.index_status {
+  width: 5%;
+  background-color: rgb(255, 253, 196);
+}
+
 .index_menu {
   width: 3%;
 }
 
 .task_table th {
   text-align: center;
+  font-size: 0.7rem;
 }
 
 .task_table td {

@@ -3,6 +3,7 @@
     <tr>
       <th class="index_content">内容</th>
       <th class="index_limit">終了期限</th>
+      <th class="index_status">ステータス</th>
     </tr>
     <% @tasks.each do |task| %>
       <tr class="task_row">
@@ -10,6 +11,7 @@
           <%= task.content %>
         <% end %></td>
         <td class="index_limit"><%= l task.limit, format: :short %></td>
+        <td class="index_status"><%= task.status %></td>
         <td class="index_menu"><%= link_to edit_task_path(task.id), remote: true do %><i class="fas fa-edit"></i><% end %></td>
         <td class="index_menu"><%= link_to task_path(task.id), method: :delete do %><i class="fas fa-trash"></i><% end %></td>
       </tr>

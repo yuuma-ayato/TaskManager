@@ -2,6 +2,7 @@
   <div class="modal-content">
     <p class="show_content"><%= @task.content %></p>
     <p class="show_detail"><%= @task.detail %></p>
+    <p class="show_status">ステータス:<%= @task.status %></p>
     <% if @task.limit %>
       <p class="show_limit">終了期限:<%= l @task.limit, format: :long %></p>
     <% end %>
