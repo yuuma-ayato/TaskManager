@@ -30,7 +30,7 @@
             Sort
           </button>
           <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-             <%= link_to '終了日時', new_task_path, remote:true, class:"dropdown-item" %>
+             <%= link_to '終了日時', tasks_path(sort: "limit"), class:"dropdown-item" %>
           </div>
         </li>
       </ul>
