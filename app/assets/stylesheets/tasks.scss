@@ -40,13 +40,17 @@ header {
   flex-flow: row;
 }
 
-.header_nav li a{
+.nav_new a{
   color: rgb(255, 255, 255);
   font-size: 2rem;
 }
 
-.sort {
-  margin-left: auto
+.nav_sort {
+  margin-left: auto;
+}
+
+.sort_button {
+  font-size: 2rem;
 }
 
 .task_table {
