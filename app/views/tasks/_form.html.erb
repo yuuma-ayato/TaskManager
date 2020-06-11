@@ -11,7 +11,7 @@
       <p><%= form.text_field :content, class:"form" %></p>
       <p><%= form.label :detail %></p>
       <p><%= form.text_area :detail, class:"form" %></p>
-      
+      <p><%= form.select :status, Task.statuses.keys %></p>
       <p><%= form.label :limit %></p>
       <% if controller.action_name == "edit" || controller.action_name == "update" %>
         <p><%= form.datetime_select :limit, include_blank: true, start_year: Date.today.year, minute_step: 5, selected: @task.limit %></p>
