@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
+  PER = 12
 
   def index
     #最初に検索済みかどうかで表示するタスクの一覧を絞る
@@ -10,9 +11,9 @@ class TasksController < ApplicationController
     end
     # 絞ったタスクをソートして返す
     if params[:sort]
-      @tasks = @task_searched.limit_desc(params[:sort]).status_asc(params[:sort]).priority_desc(params[:sort])
+      @tasks = @task_searched.limit_desc(params[:sort]).status_asc(params[:sort]).priority_desc(params[:sort]).page(params[:page]).per(PER)
     else
-      @tasks = @task_searched.order(created_at: :DESC)
+      @tasks = @task_searched.order(created_at: :DESC).page(params[:page]).per(PER)
     end
   end
 
