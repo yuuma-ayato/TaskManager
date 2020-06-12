@@ -54,11 +54,25 @@ RSpec.describe 'Tasks', type: :system do
         expect(task_list[2]).to have_content 'デフォルトの内容1'
       end
       it 'タスクが終了期限の降順に並んでいる' do
-        visit tasks_path(sort:"limit")
+        visit tasks_path(sort:"limit_desc")
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'デフォルトの内容3'
         expect(task_list[1]).to have_content 'デフォルトの内容1'
         expect(task_list[2]).to have_content 'デフォルトの内容2'
+      end
+      it 'タスクがステータスの昇順に並んでいる' do
+        visit tasks_path(sort:"status_asc")
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'デフォルトの内容1'
+        expect(task_list[1]).to have_content 'デフォルトの内容2'
+        expect(task_list[2]).to have_content 'デフォルトの内容3'
+      end
+      it 'タスクが優先順位の降順に並んでいる' do
+        visit tasks_path(sort:"priority_desc")
+        task_list = all('.task_row')
+        expect(task_list[0]).to have_content 'デフォルトの内容3'
+        expect(task_list[1]).to have_content 'デフォルトの内容2'
+        expect(task_list[2]).to have_content 'デフォルトの内容1'
       end
     end
     context 'タスクを検索した場合' do
@@ -82,13 +96,25 @@ RSpec.describe 'Tasks', type: :system do
         expect(page).to have_content 'デフォルトの内容3'
         expect(page).not_to have_content 'デフォルトの内容2'
       end
-        it '内容とステータスの両方で検索できる' do
+      it '優先順位で検索できる' do
+        visit tasks_path
+        click_link 'Search'
+        sleep 0.5
+        within '.status_search_form' do
+          select '高'
+        end
+        click_button '検索'
+        expect(page).to have_content 'デフォルトの内容3'
+        expect(page).not_to have_content 'デフォルトの内容2'
+      end
+        it '内容とステータスと優先順位で検索できる' do
           visit tasks_path
           click_link 'Search'
           sleep 0.5
           fill_in '内容', with: 'デフォルトの内容1'
           within '.status_search_form' do
             select '未着手'
+            select '低'
           end
           click_button '検索'
           expect(page).to have_content 'デフォルトの内容1'
