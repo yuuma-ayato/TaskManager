@@ -6,18 +6,21 @@ FactoryBot.define do
     detail { 'デフォルトの詳細1' }
     limit { DateTime.new(2020,10,20,00,00,00) }
     status { 0 }
+    priority { 0 }
   end
   factory :task2, class: Task do
     content { 'デフォルトの内容2' }
     detail { 'デフォルトの詳細2' }
     limit { DateTime.new(2020,8,01,00,00,00) }
     status { 1 }
+    priority { 1 }
   end
   factory :task3, class: Task do
     content { 'デフォルトの内容3' }
     detail { 'デフォルトの詳細3' }
     limit { DateTime.new(2020,11,15,00,00,00) }
     status { 2 }
+    priority { 2 }
   end
 end
 
