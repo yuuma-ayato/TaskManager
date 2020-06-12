@@ -59,16 +59,39 @@ RSpec.describe 'Tasks', type: :system do
       end
     end
     context 'タスクを検索した場合' do
-      it 'タイトルで検索できる' do
+      it '内容で検索できる' do
         visit tasks_path
         click_link 'Search'
         sleep 0.5
-        fill_in '内容', with: '内容1'
+        fill_in '内容', with: 'デフォルトの内容1'
         click_button '検索'
         expect(page).to have_content 'デフォルトの内容1'
         expect(page).not_to have_content 'デフォルトの内容2'
       end
-    end
+      it 'ステータスで検索できる' do
+        visit tasks_path
+        click_link 'Search'
+        sleep 0.5
+        within '.status_search_form' do
+          select '完了'
+        end
+        click_button '検索'
+        expect(page).to have_content 'デフォルトの内容3'
+        expect(page).not_to have_content 'デフォルトの内容2'
+      end
+        it '内容とステータスの両方で検索できる' do
+          visit tasks_path
+          click_link 'Search'
+          sleep 0.5
+          fill_in '内容', with: 'デフォルトの内容1'
+          within '.status_search_form' do
+            select '未着手'
+          end
+          click_button '検索'
+          expect(page).to have_content 'デフォルトの内容1'
+          expect(page).not_to have_content 'デフォルトの内容2'
+        end
+      end
   end
   describe 'タスク登録画面' do
     context '必要項目を入力して、createボタンを押した場合' do
