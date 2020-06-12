@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     #最初に検索済みかどうかで表示するタスクの一覧を絞る
     if params[:search].present?
-      @task_searched = Task.what_content(params[:content]).what_status(params[:status])
+      @task_searched = Task.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority])
     else
       @task_searched = Task.all
     end
