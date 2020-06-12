@@ -9,11 +9,10 @@ class TasksController < ApplicationController
       @task_searched = Task.all
     end
     # 絞ったタスクをソートして返す
-    case params[:sort]
-      when "limit"
-        @tasks = @task_searched.limit_desc
-      else
-        @tasks = @task_searched.order(created_at: :DESC)
+    if params[:sort]
+      @tasks = @task_searched.limit_desc(params[:sort]).status_asc(params[:sort]).priority_desc(params[:sort])
+    else
+      @tasks = @task_searched.order(created_at: :DESC)
     end
   end
 
