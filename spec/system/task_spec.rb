@@ -5,16 +5,19 @@ FactoryBot.define do
     content { 'デフォルトの内容1' }
     detail { 'デフォルトの詳細1' }
     limit { DateTime.new(2020,10,20,00,00,00) }
+    status { 0 }
   end
   factory :task2, class: Task do
     content { 'デフォルトの内容2' }
     detail { 'デフォルトの詳細2' }
     limit { DateTime.new(2020,8,01,00,00,00) }
+    status { 1 }
   end
   factory :task3, class: Task do
     content { 'デフォルトの内容3' }
     detail { 'デフォルトの詳細3' }
     limit { DateTime.new(2020,11,15,00,00,00) }
+    status { 2 }
   end
 end
 
@@ -23,7 +26,9 @@ RSpec.describe 'Tasks', type: :system do
     # それぞれのテストケースで、before内のコードが実行
     # 各テストで使用するタスクを1件作成する
     # 作成したタスクオブジェクトを各テストケースで呼び出せるようにインスタンス変数に代入
-    @task = FactoryBot.create(:task1)
+    FactoryBot.create(:task1)
+    FactoryBot.create(:task2)
+    FactoryBot.create(:task3)
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
@@ -39,20 +44,26 @@ RSpec.describe 'Tasks', type: :system do
     end
     context '複数のタスクを作成した場合' do
       it 'タスクが作成日時の降順に並んでいる' do
-        FactoryBot.create(:task2)
         visit tasks_path
         task_list = all('.task_row')
-        expect(task_list[0]).to have_content 'デフォルトの内容2'
+        expect(task_list[0]).to have_content 'デフォルトの内容3'
+        expect(task_list[1]).to have_content 'デフォルトの内容2'
         expect(task_list[1]).to have_content 'デフォルトの内容1'
       end
       it 'タスクが終了期限の降順に並んでいる' do
-        FactoryBot.create(:task2)
-        FactoryBot.create(:task3)
         visit tasks_path(sort:"limit")
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'デフォルトの内容3'
         expect(task_list[1]).to have_content 'デフォルトの内容1'
         expect(task_list[2]).to have_content 'デフォルトの内容2'
+      end
+    end
+    context 'タスクを検索した場合' do
+      it 'タイトルで検索できる' do
+        visit tasks_path
+        click_link 'Search'
+        sleep 1
+        fill_in ''
       end
     end
   end
