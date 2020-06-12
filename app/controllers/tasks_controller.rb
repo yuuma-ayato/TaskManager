@@ -1,5 +1,6 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
+
   def index
     #最初に検索済みかどうかで表示するタスクの一覧を絞る
     if params[:search].present?
@@ -8,7 +9,12 @@ class TasksController < ApplicationController
       @task_searched = Task.all
     end
     # 絞ったタスクをソートして返す
-    sort
+    case params[:sort]
+      when "limit"
+        @tasks = @task_searched.limit_desc
+      else
+        @tasks = @task_searched
+    end
   end
 
   def new
@@ -53,12 +59,5 @@ class TasksController < ApplicationController
     params.require(:task).permit(:content,:detail,:limit,:status)
   end
 
-  def sort
-    case params[:sort]
-    when "limit"
-      @tasks = @task_searched.order(limit: :desc)
-    else
-      @tasks = @task_searched.order(created_at: :desc)
-    end
-  end
+
 end
