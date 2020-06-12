@@ -48,7 +48,7 @@ RSpec.describe 'Tasks', type: :system do
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'デフォルトの内容3'
         expect(task_list[1]).to have_content 'デフォルトの内容2'
-        expect(task_list[1]).to have_content 'デフォルトの内容1'
+        expect(task_list[2]).to have_content 'デフォルトの内容1'
       end
       it 'タスクが終了期限の降順に並んでいる' do
         visit tasks_path(sort:"limit")
@@ -62,8 +62,11 @@ RSpec.describe 'Tasks', type: :system do
       it 'タイトルで検索できる' do
         visit tasks_path
         click_link 'Search'
-        sleep 1
-        fill_in ''
+        sleep 0.5
+        fill_in '内容', with: '内容1'
+        click_button '検索'
+        expect(page).to have_content 'デフォルトの内容1'
+        expect(page).not to have_content 'デフォルトの内容2'
       end
     end
   end
@@ -74,7 +77,7 @@ RSpec.describe 'Tasks', type: :system do
         visit tasks_path
         # 「+New」のリンクをクリックし、タスク新規作成フォームを表示
         click_link '+New'
-        sleep 1
+        sleep 0.5
         # contentというラベル名の入力欄と、detailというラベル名の入力欄に
         # タスクの内容と詳細をそれぞれfill_in(入力)する
         fill_in '内容', with: 'タスクデータテスト'

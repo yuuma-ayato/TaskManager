@@ -13,7 +13,7 @@ class TasksController < ApplicationController
       when "limit"
         @tasks = @task_searched.limit_desc
       else
-        @tasks = @task_searched
+        @tasks = @task_searched.order(created_at: :DESC)
     end
   end
 

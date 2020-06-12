@@ -1,6 +1,6 @@
 <div class="modal-dialog">
   <div class="modal-content">
-    <%= form_with(method: :get, local:true, url:tasks_path) do |form| %>
+    <%= form_with(model:Task.new, method: :get, local:true, url:tasks_path) do |form| %>
       <p><%= form.label :content %></p>
       <p><%= form.text_field :content %> </p>
       <p><%= form.label :status %><%= form.select :status, Task.statuses.keys, include_blank: true %></p>
