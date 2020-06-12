@@ -66,7 +66,7 @@ RSpec.describe 'Tasks', type: :system do
         fill_in '内容', with: '内容1'
         click_button '検索'
         expect(page).to have_content 'デフォルトの内容1'
-        expect(page).not to have_content 'デフォルトの内容2'
+        expect(page).not_to have_content 'デフォルトの内容2'
       end
     end
   end
