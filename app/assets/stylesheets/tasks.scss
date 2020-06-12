@@ -6,6 +6,12 @@ body {
   min-height: 100%;
   background-image: url("/assets/bg.jpg");
   background-size: cover;
+  font-family: "Helvetica Neue",
+   Arial,
+   "Hiragino Kaku Gothic ProN",
+   "Hiragino Sans",
+   Meiryo,
+   sans-serif;
 }
 
 ul {
@@ -24,25 +30,26 @@ header {
 .container {
   background-color: rgb(255, 255, 255);
   margin: 20px auto;
-  width: 70%;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 
-#header_logo {
+.header_logo {
   float:left;
   display: inline-block;
-  padding-top: 10px;
+  font-size: 2rem;
+  padding-top: 20px;
 }
 .nav_new {
   display: inline-block;
-  padding-left: 20px;
+  padding-top: 10px;
+  padding-left: 30px;
 }
 
 .nav_new a{
   color: rgb(255, 255, 255);
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .right {
@@ -58,22 +65,30 @@ header {
 }
 
 .index_content {
-  width: 50%;
+  width: 67%;
 }
 
 .index_limit {
   width: 15%;
   text-align: center;
-  background-color: rgb(241, 255, 210);
 }
 
 .index_status {
+  width: 7%;
+  text-align: center;
+}
+
+.index_priority {
   width: 5%;
-  background-color: rgb(255, 253, 196);
+  text-align: center;
 }
 
 .index_menu {
   width: 3%;
+}
+
+.index_menu img {
+  height: 70%;
 }
 
 .task_table th {
@@ -85,9 +100,19 @@ header {
   padding:0px 5px;
 }
 
+.row_colored {
+  background-color: rgb(236, 246, 250);
+  border-radius: 10px;
+}
+
 .modal-content {
-  padding: 20px;
+  padding: 10px;
   text-align: center;
+}
+
+.modal-dialog {
+  width: 70%;
+  margin: 0 auto;
 }
 
 .form {
@@ -100,6 +125,12 @@ header {
 .show_content {
   font-size: 2rem;
   font-weight: bold;
+}
+
+.dropdown_original select {
+  background-color: rgb(174, 218, 232);
+  border-style: none;
+  border-radius: 10px;
 }
 
 .clearfix::after {
@@ -119,4 +150,46 @@ header {
 
 .pagination {
   justify-content: center;
+}
+
+.red {
+  background-color: rgb(247, 126, 153);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.yellow {
+  background-color: rgb(249, 205, 76);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.green {
+  background-color: rgb(121, 209, 62);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.complete {
+  background-color: rgb(219, 219, 219);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.working {
+  background-color: rgb(69, 69, 69);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.waiting {
+  background-color: rgb(180, 180, 180);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
 }
