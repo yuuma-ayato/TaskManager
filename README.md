@@ -18,7 +18,7 @@ has_many :tasks, dependent: :destroy
 |------|----|-------|
 |user_id|references|null: false, foreign_key: true|
 |content|string|null: false, limit: 50|
-|detail|text|limit: 255|
+|detail|text|
 |priority|enum|null: false, default: "通常"|
 |status|enum|null: false, default: "未着手"|
 |limit|datetime|
