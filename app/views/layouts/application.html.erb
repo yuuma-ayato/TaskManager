@@ -14,7 +14,13 @@
       <ul class="header_nav">
         <li class="nav_new"><%= link_to '+New', new_task_path, remote:true, class:"btn btn-primary" %> </li>
         <div class="right">
-          <li class="nav_search"><%= link_to 'Search', search_tasks_path, remote:true, class:"btn btn-primary" %></li>
+          <li class="nav_search">
+            <% if params[:search] %>
+              <%= link_to '検索をリセット', tasks_path(sort: params[:sort]), class:"btn btn-primary" %>
+            <% else %>
+              <%= link_to 'Search', search_tasks_path, remote:true, class:"btn btn-primary" %>
+            <% end %>
+          </li>
           <li class="nav_sort dropdown">
             <button class="btn btn-primary dropdown-toggle"
             type="button" id="dropdownMenu1" data-toggle="dropdown"
@@ -22,10 +28,10 @@
               Sort
             </button>
             <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-              <%= link_to '作成日時', tasks_path, class:"dropdown-item" %>
-              <%= link_to '終了期限', tasks_path(sort: "limit_desc"), class:"dropdown-item sort_limit" %>
-              <%= link_to 'ステータス', tasks_path(sort: "status_asc"), class:"dropdown-item sort_status" %>
-              <%= link_to '優先順位', tasks_path(sort: "priority_desc"), class:"dropdown-item sort_priority" %>
+              <%= link_to '作成日時', tasks_path(search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item" %>
+              <%= link_to '終了期限', tasks_path(sort: "limit_desc", search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_limit" %>
+              <%= link_to 'ステータス', tasks_path(sort: "status_asc",search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_status" %>
+              <%= link_to '優先順位', tasks_path(sort: "priority_desc",search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_priority" %>
             </div>
           </li>
         </div>

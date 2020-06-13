@@ -1,4 +1,9 @@
 module TasksHelper
+
+  def params_for_search
+    search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]
+  end
+
   def priority_color(task)
     if task.priority == "高"
       "red"
