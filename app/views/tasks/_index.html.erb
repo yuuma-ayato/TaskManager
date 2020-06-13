@@ -1,3 +1,12 @@
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash time-limit flash-#{key}" %>
+<% end %>
+<script>
+  $( document ).ready(function() {
+    // メッセージを2秒後にフェードアウトする
+    $('.time-limit').fadeOut(2000);
+  });
+</script>
 <table class="task_table">
   <tr>
     <th class="index_content">内容</th>

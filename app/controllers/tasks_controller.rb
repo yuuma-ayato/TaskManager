@@ -15,11 +15,9 @@ class TasksController < ApplicationController
     set_tasks
     respond_to do |format|
       if @task.save
-        format.html { redirect_to tasks_path
-                      flash[:notice] = "新しいタスクを作成しました" }
+        flash.now[:notice] = "新しいタスクを作成しました"
         format.js { render :index }
       else
-        format.html { render :new }
         format.js { render :new }
       end
     end
@@ -32,10 +30,14 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(get_task_params)
-      redirect_to tasks_path, notice:"タスクを編集しました"
-    else
-      render :edit
+    set_tasks
+    respond_to do |format|
+      if @task.update(get_task_params)
+        flash.now[:notice] = "タスクを編集しました"
+        format.js { render :index }
+      else
+        format.js { render :edit }
+      end
     end
   end
 

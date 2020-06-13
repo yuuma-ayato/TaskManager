@@ -9,15 +9,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
   <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag :div, value, class: "flash time-limit flash-#{key}" %>
-    <% end %>
-    <script>
-      $( document ).ready(function() {
-        // メッセージを1.5秒後にフェードアウトする
-        $('.time-limit').fadeOut(1500);
-      });
-    </script>
     <header>
       <h1 class="header_logo d-none d-md-table-cell">TaskManager</h1>
       <ul class="header_nav">
