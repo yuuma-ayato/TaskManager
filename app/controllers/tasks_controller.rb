@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(get_task_params)
         flash.now[:notice] = "タスクを編集しました"
-        format.js { render :index }
+        format.js { redirect_to tasks_path }
       else
         format.js { render :edit }
       end
@@ -46,7 +46,7 @@ class TasksController < ApplicationController
     set_tasks
     respond_to do |format|
       flash.now[:notice] = "タスクを削除しました"
-      format.js { render :index }
+      format.js { redirect_to tasks_path }
     end
   end
 
