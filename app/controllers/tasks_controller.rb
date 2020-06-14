@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i(show edit update destroy)
+  before_action :find_task, only: %i(show edit update destroy)
   PER = 12
 
   def index
@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(get_task_params)
         flash.now[:notice] = "タスクを編集しました"
-        format.js { render :index }
+        format.js { redirect_to tasks_path }
       else
         format.js { render :edit }
       end
@@ -46,12 +46,12 @@ class TasksController < ApplicationController
     set_tasks
     respond_to do |format|
       flash.now[:notice] = "タスクを削除しました"
-      format.js { render :index }
+      format.js { redirect_to tasks_path }
     end
   end
 
   private
-  def set_task
+  def find_task
     @task = Task.find(params[:id])
   end
 
