@@ -1,7 +1,9 @@
 class TasksController < ApplicationController
   before_action :set_task, only: %i(show edit update destroy)
+  PER = 12
+
   def index
-      @tasks = sorted_tasks
+    set_tasks
   end
 
   def new
@@ -10,11 +12,14 @@ class TasksController < ApplicationController
 
   def create
     @task = Task.new(get_task_params)
-    if @task.save
-      redirect_to tasks_path
-      flash[:notice] = "新しいタスクを作成しました"
-    else
-      render :new
+    set_tasks
+    respond_to do |format|
+      if @task.save
+        flash.now[:notice] = "新しいタスクを作成しました"
+        format.js { render :index }
+      else
+        format.js { render :new }
+      end
     end
   end
 
@@ -25,16 +30,24 @@ class TasksController < ApplicationController
   end
 
   def update
-    if @task.update(get_task_params)
-      redirect_to tasks_path, notice:"タスクを編集しました"
-    else
-      render :edit
+    set_tasks
+    respond_to do |format|
+      if @task.update(get_task_params)
+        flash.now[:notice] = "タスクを編集しました"
+        format.js { render :index }
+      else
+        format.js { render :edit }
+      end
     end
   end
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice:"タスクを削除しました"
+    set_tasks
+    respond_to do |format|
+      flash.now[:notice] = "タスクを削除しました"
+      format.js { render :index }
+    end
   end
 
   private
@@ -43,15 +56,23 @@ class TasksController < ApplicationController
   end
 
   def get_task_params
-    params.require(:task).permit(:content,:detail,:limit)
+    params.require(:task).permit(:content,:detail,:limit,:status,:priority)
   end
 
-  def sorted_tasks
-    case params[:sort]
-    when "limit"
-      Task.all.order(limit: :DESC)
+  def set_tasks
+    # 最初に検索済みかどうかで対象のタスクを絞る
+    if params[:search].present?
+      @task_searched = Task.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority])
     else
-      Task.all.order(created_at: :DESC)
+      @task_searched = Task.all
+    end
+    # 絞ったタスクをソートして返す
+    if params[:sort]
+      @tasks = @task_searched.limit_desc(params[:sort]).status_asc(params[:sort]).priority_desc(params[:sort]).page(params[:page]).per(PER)
+    else
+      @tasks = @task_searched.order(created_at: :DESC).page(params[:page]).per(PER)
     end
   end
+
+
 end

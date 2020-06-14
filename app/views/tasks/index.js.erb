@@ -1,0 +1,4 @@
+$('.modal').on('ajax:success', function() {
+  $('.modal').modal('hide')
+});
+$("#tasks_area").html("<%= j(render 'tasks/index', { tasks: @tasks }) %>")

@@ -1,0 +1,34 @@
+<% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash time-limit flash-#{key}" %>
+<% end %>
+<script>
+  $( document ).ready(function() {
+    // メッセージを2秒後にフェードアウトする
+    $('.time-limit').fadeOut(2000);
+  });
+</script>
+<table class="task_table">
+  <tr>
+    <th class="index_content">内容</th>
+    <th class="index_limit d-none d-md-table-cell">終了期限</th>
+    <th class="index_status">ステータス</th>
+    <th class="index_priority">優先順位</th>
+  </tr>
+  <% tasks.each_with_index do |task, i| %>
+  <% if i.odd? %>
+    <tr class="task_row row_colored">
+  <% else %>
+    <tr class="task_row">
+  <% end %>
+      <td><%= link_to task_path(task.id), remote: true do %>
+        <%= task.content %>
+      <% end %></td>
+      <td class="index_limit d-none d-md-table-cell"><%= l task.limit, format: :short %></td>
+      <td class="index_status <%= status_color(task) %>"><%= task.status %></td>
+      <td class="index_priority <%= priority_color(task) %>"><%= task.priority %></</td>
+      <td class="index_menu"><%= link_to edit_task_path(task.id), remote: true do %><%= image_tag "/assets/edit.jpg" %><% end %></td>
+      <td class="index_menu"><%= link_to task_path(task.id), remote: true, method: :delete do %><%= image_tag "/assets/delete.jpg" %><% end %></td>
+    </tr>
+  <% end %>
+</table>
+<p class="paginate"><%= paginate tasks %></p>

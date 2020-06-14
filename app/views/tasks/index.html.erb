@@ -1,19 +1,6 @@
 <div class="container">
-  <table class="task_table">
-    <tr>
-      <th class="index_content">内容</th>
-      <th class="index_limit">終了期限</th>
-    </tr>
-    <% @tasks.each do |task| %>
-      <tr class="task_row">
-        <td><%= link_to task_path(task.id), remote: true do %>
-          <%= task.content %>
-        <% end %></td>
-        <td class="index_limit"><%= l task.limit, format: :short %></td>
-        <td class="index_menu"><%= link_to edit_task_path(task.id), remote: true do %><i class="fas fa-edit"></i><% end %></td>
-        <td class="index_menu"><%= link_to task_path(task.id), method: :delete do %><i class="fas fa-trash"></i><% end %></td>
-      </tr>
-    <% end %>
-  </table>
+  <div id="tasks_area">
+    <%= render partial: 'tasks/index', locals: { tasks: @tasks } %>
+  </div>
 </div>
 <div class="modal fade" id="user-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"></div>

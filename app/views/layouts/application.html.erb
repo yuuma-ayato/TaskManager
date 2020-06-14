@@ -7,33 +7,34 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <script src="https://kit.fontawesome.com/45ec1eb6b9.js" crossorigin="anonymous"></script>
   </head>
   <body>
-    <% flash.each do |key, value| %>
-      <%= content_tag :div, value, class: "flash time-limit flash-#{key}" %>
-    <% end %>
-    <script>
-      $( document ).ready(function() {
-        // メッセージを1.5秒後にフェードアウトする
-        $('.time-limit').fadeOut(1500);
-      });
-    </script>
-    <header class="clearfix">
-      <h1 id="header_logo">TaskManager</h1>
+    <header>
+      <h1 class="header_logo d-none d-md-table-cell">TaskManager</h1>
       <ul class="header_nav">
         <li class="nav_new"><%= link_to '+New', new_task_path, remote:true, class:"btn btn-primary" %> </li>
-        <li class="nav_sort dropdown">
-          <button class="btn btn-primary dropdown-toggle sort_button"
-          type="button" id="dropdownMenu1" data-toggle="dropdown"
-          aria-haspopup="true" aria-expanded="false">
-            Sort
-          </button>
-          <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-           <%= link_to '作成日時', tasks_path, class:"dropdown-item" %>
-           <%= link_to '終了期限', tasks_path(sort: "limit"), class:"dropdown-item sort_limit" %>
-          </div>
-        </li>
+        <div class="right">
+          <li class="nav_search">
+            <% if params[:search] %>
+              <%= link_to '検索をリセット', tasks_path(sort: params[:sort]), class:"btn btn-primary" %>
+            <% else %>
+              <%= link_to 'Search', search_tasks_path, remote:true, class:"btn btn-primary" %>
+            <% end %>
+          </li>
+          <li class="nav_sort dropdown">
+            <button class="btn btn-primary dropdown-toggle"
+            type="button" id="dropdownMenu1" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+              Sort
+            </button>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+              <%= link_to '作成日時', tasks_path(search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item" %>
+              <%= link_to '終了期限', tasks_path(sort: "limit_desc", search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_limit" %>
+              <%= link_to 'ステータス', tasks_path(sort: "status_asc",search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_status" %>
+              <%= link_to '優先順位', tasks_path(sort: "priority_desc",search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_priority" %>
+            </div>
+          </li>
+        </div>
       </ul>
     </header>
     <%= yield %>

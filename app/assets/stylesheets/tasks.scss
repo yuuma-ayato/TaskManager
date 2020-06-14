@@ -6,6 +6,12 @@ body {
   min-height: 100%;
   background-image: url("/assets/bg.jpg");
   background-size: cover;
+  font-family: "Helvetica Neue",
+   Arial,
+   "Hiragino Kaku Gothic ProN",
+   "Hiragino Sans",
+   Meiryo,
+   sans-serif;
 }
 
 ul {
@@ -19,38 +25,39 @@ h1 {
 
 header {
   height: 70px;
-  width: 80%;
+  width: 85%;
 }
 .container {
   background-color: rgb(255, 255, 255);
   margin: 20px auto;
-  width: 70%;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 0 15px rgba(0,0,0,.3);
 }
 
-#header_logo {
+.header_logo {
   float:left;
-  padding-top: 10px;
+  display: inline-block;
+  font-size: 2rem;
+  padding-top: 20px;
 }
-
-.header_nav {
-  display: flex;
-  flex-flow: row;
+.nav_new {
+  display: inline-block;
+  padding-top: 10px;
+  padding-left: 30px;
 }
 
 .nav_new a{
   color: rgb(255, 255, 255);
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
-.nav_sort {
-  margin-left: auto;
+.right {
+  float: right;
 }
-
-.sort_button {
-  font-size: 2rem;
+.right li {
+  float:left;
+  padding: 20px 10px;
 }
 
 .task_table {
@@ -58,30 +65,54 @@ header {
 }
 
 .index_content {
-  width: 50%;
+  width: 67%;
 }
 
 .index_limit {
   width: 15%;
   text-align: center;
-  background-color: rgb(241, 255, 210);
+}
+
+.index_status {
+  width: 7%;
+  text-align: center;
+}
+
+.index_priority {
+  width: 5%;
+  text-align: center;
 }
 
 .index_menu {
   width: 3%;
 }
 
+.index_menu img {
+  height: 70%;
+}
+
 .task_table th {
   text-align: center;
+  font-size: 0.7rem;
 }
 
 .task_table td {
   padding:0px 5px;
 }
 
+.row_colored {
+  background-color: rgb(236, 246, 250);
+  border-radius: 10px;
+}
+
 .modal-content {
-  padding: 20px;
+  padding: 10px;
   text-align: center;
+}
+
+.modal-dialog {
+  width: 70%;
+  margin: 0 auto;
 }
 
 .form {
@@ -94,6 +125,12 @@ header {
 .show_content {
   font-size: 2rem;
   font-weight: bold;
+}
+
+.dropdown_original select {
+  background-color: rgb(174, 218, 232);
+  border-style: none;
+  border-radius: 10px;
 }
 
 .clearfix::after {
@@ -109,4 +146,51 @@ header {
   text-align: center;
   position:fixed;
   top: 0;
+  left: 0;
+}
+
+.pagination {
+  justify-content: center;
+}
+
+.red {
+  background-color: rgb(247, 126, 153);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.yellow {
+  background-color: rgb(249, 205, 76);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.green {
+  background-color: rgb(121, 209, 62);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.complete {
+  background-color: rgb(219, 219, 219);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.working {
+  background-color: rgb(69, 69, 69);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
+}
+
+.waiting {
+  background-color: rgb(180, 180, 180);
+  color:white;
+  padding: 5px;
+  border-radius: 10px;
 }
