@@ -4,8 +4,13 @@
   </div>
   <%= form_with(method: :get, local:true, url:tasks_path) do |form| %>
     <%= form.hidden_field :hide_completed, value:"true" %>
+    <%= form.hidden_field :search, value: params[:search] %>
+    <%= form.hidden_field :content, value: params[:content] %>
+    <%= form.hidden_field :status, value: params[:status] %>
+    <%= form.hidden_field :priority, value: params[:priority] %>
+    <%= form.hidden_field :sort, value: params[:sort] %>
     <% if params[:hide_completed] %>
-      <%= link_to "完了したタスクを表示", tasks_path(search:params[:search],sort:params[:sort]), class:"btn btn-primary hide_completed"%>
+      <%= link_to "完了したタスクを表示", tasks_path(search:params[:search],sort:params[:sort],content:params[:content],status:params[:status],priority:params[:priority]), class:"btn btn-primary hide_completed"%>
     <% else %>
       <%= form.submit "完了したタスクを非表示", class:"btn btn-primary hide_completed"%>
     <% end %>
