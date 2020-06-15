@@ -1,1 +1,1 @@
-<%= user.name %>
+<p show_user>ログイン中:<%= user.name %>  <%= user.email %>  <%= link_to "LogOut", session_path(user.id), method: :delete, class:"btn btn-primary" %></p>
