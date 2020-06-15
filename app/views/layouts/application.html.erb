@@ -40,6 +40,9 @@
     <%= yield %>
     <footer>
       <%= link_to 'SignUp', new_user_path, remote:true, class:"btn btn-primary" %>
+      <%= link_to 'LogIn', new_session_path, remote:true, class:"btn btn-primary" %>
+      <div id="footer_display">
+      </div>
     </footer>
   </body>
 </html>

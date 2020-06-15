@@ -7,12 +7,15 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     respond_to do |format|
       if @user.save
-        format.html { redirect_to '/tasks'}
+        format.html { redirect_to '/tasks' }
       else
         format.js { render :new }
       end
     end
+  end
 
+  def show
+    @user = User.find(params[:id])
   end
 
   private
