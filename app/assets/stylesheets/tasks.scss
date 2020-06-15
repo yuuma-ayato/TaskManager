@@ -194,3 +194,10 @@ header {
   padding: 5px;
   border-radius: 10px;
 }
+
+.hide_completed {
+  float: right;
+}
+.hide_completed input {
+  font-size: 0.7rem;
+}

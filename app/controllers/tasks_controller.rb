@@ -60,11 +60,16 @@ class TasksController < ApplicationController
   end
 
   def set_tasks
-    # 最初に検索済みかどうかで対象のタスクを絞る
-    if params[:search].present?
-      @task_searched = Task.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority])
+    if params[:hide_completed].present?
+      @task_searched = Task.hide_completed(params[:hide_completed])
     else
       @task_searched = Task.all
+    end
+    # 最初に検索済みかどうかで対象のタスクを絞る
+    if params[:search].present?
+      @task_searched = @task_searched.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority])
+    else
+      @task_searched = @task_searched.all
     end
     # 絞ったタスクをソートして返す
     if params[:sort]
