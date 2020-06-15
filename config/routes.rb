@@ -9,5 +9,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resources :users, only: %i(index new create show edit update destroy)
   end
+  resources :users, only: %i(new create show)
   resources :sessions, only: %i(new create destroy)
 end
