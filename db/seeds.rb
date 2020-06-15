@@ -2,9 +2,5 @@ content_sample = ["テストをする","シードデータを作る","Railsを�
 values = [0,1,2]
 
 20.times do |n|
-  Task.create(content:content_sample.sample + "#{n}", detail: "シードデータで投入したタスクです", limit: DateTime.now, status: values.sample, priority:values.sample,user_id:[1..3].sample)
-end
-
-5.times do |n|
-  User.create(name:"user" + "#{n}", email: "test" + "#{n}" + "@test.com", password_digest: "password")
+  Task.create(content:content_sample.sample + "#{n}", detail: "シードデータで投入したタスクです", limit: DateTime.now, status: values.sample, priority:values.sample, user_id:30)
 end

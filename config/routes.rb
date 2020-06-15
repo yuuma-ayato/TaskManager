@@ -5,5 +5,5 @@ Rails.application.routes.draw do
     get 'search'
     end
   end
-  resources :users, only: %i(new)
+  resources :users, only: %i(new create show)
 end
