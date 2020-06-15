@@ -43,8 +43,9 @@
         <% if logged_in? %>
           <%= render partial: "users/show", locals: { user: current_user } %>
         <% else %>
+          <p>ログインして下さい。
           <%= link_to 'SignUp', new_user_path, remote:true, class:"btn btn-primary" %>
-          <%= link_to 'LogIn', new_session_path, remote:true, class:"btn btn-primary" %>
+          <%= link_to 'LogIn', new_session_path, remote:true, class:"btn btn-primary" %></p>
         <% end %>
       </div>
     </footer>

@@ -61,9 +61,9 @@ class TasksController < ApplicationController
 
   def set_tasks
     if params[:hide_completed].present?
-      @task_searched = Task.hide_completed(params[:hide_completed])
+      @task_searched = current_user.tasks.hide_completed(params[:hide_completed])
     else
-      @task_searched = Task.all
+      @task_searched = current_user.tasks
     end
     # 最初に検索済みかどうかで対象のタスクを絞る
     if params[:search].present?
