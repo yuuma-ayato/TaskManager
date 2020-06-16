@@ -5,4 +5,5 @@ class Task < ApplicationRecord
   enum priority: %i(低 中 高)
   validates :content, presence: true, length: { maximum: 50 }
   validates :detail, length: { maximum: 255 }
+  belongs_to :user
 end

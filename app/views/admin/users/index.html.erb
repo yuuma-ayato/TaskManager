@@ -1,0 +1,21 @@
+<div class="container">
+  <% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash time-limit flash-#{key}" %>
+  <% end %>
+  <script>
+  $( document ).ready(function() {
+    // メッセージを2秒後にフェードアウトする
+    $('.time-limit').fadeOut(2000);
+  });
+  </script
+  <% if logged_in? %>
+  <p>ユーザー管理画面</p>
+    <%= link_to "ユーザーを作成する",new_admin_user_path %>
+    <% @users.includes(:tasks).map{|u| u.tasks.size } %>
+    <% @users.includes(:tasks).each do |user| %>
+      <p class="index_row"><%= user.id %> <%= user.name %> 作成したタスクの件数:<%= @count %>  <%= link_to "詳細",admin_user_path(user.id), class:"detail" %> <%= link_to "編集",edit_admin_user_path(user.id), class:"edit" %> <%= link_to "削除",admin_user_path(user.id), class:"delete", method: :delete %></p>
+    <% end %>
+    <% else %>
+    <p>管理ユーザーのアカウントにログインして下さい。</p>
+    <% end %>
+</div>

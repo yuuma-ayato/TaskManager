@@ -10,6 +10,7 @@
 |name|string|limit: 20|
 |email|string|unique: true, limit: 255|
 |password|string|limit: 128|
+|admin|boolean|default: false|
 ### Association
 has_many :tasks, dependent: :destroy
 

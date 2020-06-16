@@ -1,12 +1,20 @@
 require 'rails_helper'
 
 FactoryBot.define do
+  factory :user1, class: User do
+    id { 1 }
+    name { "テストユーザー1" }
+    email { "test_user@test.com" }
+    password { "password" }
+    admin { false }
+  end
   factory :task1, class: Task do
     content { 'デフォルトの内容1' }
     detail { 'デフォルトの詳細1' }
     limit { DateTime.new(2020,10,20,00,00,00) }
     status { 0 }
     priority { 0 }
+    user { User.first }
   end
   factory :task2, class: Task do
     content { 'デフォルトの内容2' }
@@ -14,6 +22,7 @@ FactoryBot.define do
     limit { DateTime.new(2020,8,01,00,00,00) }
     status { 1 }
     priority { 1 }
+    user { User.first }
   end
   factory :task3, class: Task do
     content { 'デフォルトの内容3' }
@@ -21,6 +30,7 @@ FactoryBot.define do
     limit { DateTime.new(2020,11,15,00,00,00) }
     status { 2 }
     priority { 2 }
+    user { User.first }
   end
 end
 
@@ -29,16 +39,24 @@ RSpec.describe 'Tasks', type: :system do
     # それぞれのテストケースで、before内のコードが実行
     # 各テストで使用するタスクを1件作成する
     # 作成したタスクオブジェクトを各テストケースで呼び出せるようにインスタンス変数に代入
+    FactoryBot.create(:user1)
     FactoryBot.create(:task1)
     FactoryBot.create(:task2)
     FactoryBot.create(:task3)
+    # タスク一覧ページに遷移
+    visit tasks_path
+    # ログインする
+    click_link 'LogIn'
+    sleep 0.5
+    fill_in 'Email', with: 'test_user@test.com'
+    fill_in 'Password', with: 'password'
+    click_button 'Log in'
   end
   describe 'タスク一覧画面' do
     context 'タスクを作成した場合' do
       # テストコードを it '~' do end ブロックの中に記載する
       it '作成済みのタスクが表示される' do
-        # タスク一覧ページに遷移
-        visit tasks_path
+
         # visitした（遷移した）page（タスク一覧ページ）に「task」という文字列が
         # have_contentされているか。（含まれているか。）ということをexpectする（確認・期待する）
         expect(page).to have_content 'デフォルトの内容1'
@@ -54,6 +72,7 @@ RSpec.describe 'Tasks', type: :system do
         expect(task_list[2]).to have_content 'デフォルトの内容1'
       end
       it 'タスクが終了期限の降順に並んでいる' do
+        visit tasks_path
         visit tasks_path(sort:"limit_desc")
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'デフォルトの内容3'
@@ -61,6 +80,7 @@ RSpec.describe 'Tasks', type: :system do
         expect(task_list[2]).to have_content 'デフォルトの内容2'
       end
       it 'タスクがステータスの昇順に並んでいる' do
+        visit tasks_path
         visit tasks_path(sort:"status_asc")
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'デフォルトの内容1'
@@ -68,6 +88,7 @@ RSpec.describe 'Tasks', type: :system do
         expect(task_list[2]).to have_content 'デフォルトの内容3'
       end
       it 'タスクが優先順位の降順に並んでいる' do
+        visit tasks_path
         visit tasks_path(sort:"priority_desc")
         task_list = all('.task_row')
         expect(task_list[0]).to have_content 'デフォルトの内容3'

@@ -34,7 +34,7 @@ class TasksController < ApplicationController
     respond_to do |format|
       if @task.update(get_task_params)
         flash.now[:notice] = "タスクを編集しました"
-        format.js { redirect_to tasks_path }
+        format.js { render "tasks/index" }
       else
         format.js { render :edit }
       end
@@ -56,21 +56,28 @@ class TasksController < ApplicationController
   end
 
   def get_task_params
-    params.require(:task).permit(:content,:detail,:limit,:status,:priority)
+    params.require(:task).permit(:content,:detail,:limit,:status,:priority).merge(user_id:current_user.id)
   end
 
   def set_tasks
-    # 最初に検索済みかどうかで対象のタスクを絞る
-    if params[:search].present?
-      @task_searched = Task.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority])
-    else
-      @task_searched = Task.all
-    end
-    # 絞ったタスクをソートして返す
-    if params[:sort]
-      @tasks = @task_searched.limit_desc(params[:sort]).status_asc(params[:sort]).priority_desc(params[:sort]).page(params[:page]).per(PER)
-    else
-      @tasks = @task_searched.order(created_at: :DESC).page(params[:page]).per(PER)
+    if logged_in?
+      if params[:hide_completed].present?
+        @task_searched = current_user.tasks.hide_completed(params[:hide_completed])
+      else
+        @task_searched = current_user.tasks
+      end
+      # 最初に検索済みかどうかで対象のタスクを絞る
+      if params[:search].present?
+        @task_searched = @task_searched.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority])
+      else
+        @task_searched = @task_searched.all
+      end
+      # 絞ったタスクをソートして返す
+      if params[:sort]
+        @tasks = @task_searched.limit_desc(params[:sort]).status_asc(params[:sort]).priority_desc(params[:sort]).page(params[:page]).per(PER)
+      else
+        @tasks = @task_searched.order(created_at: :DESC).page(params[:page]).per(PER)
+      end
     end
   end
 
