@@ -1,6 +1,7 @@
 class Admin::UsersController < ApplicationController
   before_action :set_user, only: %i(show edit update destroy)
   before_action :admin_only
+
   def index
     @users = User.all.includes(:tasks)
   end
@@ -35,9 +36,13 @@ class Admin::UsersController < ApplicationController
   end
 
   def destroy
-    @user.destroy
-    redirect_to admin_users_path
-    flash[:notice] = "ユーザーを削除しました"
+    if @user.destroy
+      redirect_to admin_users_path
+      flash[:notice] = "ユーザーを削除しました"
+    else
+      redirect_to admin_users_path
+      flash[:notice] = "このユーザーは削除出来ません。"
+    end
   end
 
   private
