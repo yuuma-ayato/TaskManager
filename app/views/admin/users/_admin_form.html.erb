@@ -14,6 +14,7 @@
     <p><%= form.password_field :password %></p>
     <p><%= form.label :password_confirmation %></p>
     <p><%= form.password_field :password_confirmation %></p>
+    <p><%= form.select :admin, [["一般ユーザー",false],["管理ユーザー",true]] %> </p>
     <p><%= form.submit "送信" %></p>
   <% end %>
 </div>
