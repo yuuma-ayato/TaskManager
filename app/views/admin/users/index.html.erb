@@ -9,7 +9,7 @@
   });
   </script
   <% if logged_in? %>
-  <p>ユーザー管理画面</p>
+  <p>ユーザー管理画面  <%= link_to "ラベル管理画面へ", admin_labels_path %></p>
     <%= link_to "ユーザーを作成する",new_admin_user_path %>
     <% @users.includes(:tasks).map{|u| u.tasks.size } %>
     <% @users.includes(:tasks).each do |user| %>

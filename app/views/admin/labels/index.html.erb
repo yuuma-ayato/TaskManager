@@ -1,0 +1,8 @@
+<div class="container">
+<p>ラベル管理画面</p>
+<p><%= link_to "ラベルを作成する", new_admin_label_path %></p>
+<p>ラベル一覧</p>
+<% @labels.each do |label| %>
+<%= label.name %>
+<% end %>
+</div>
