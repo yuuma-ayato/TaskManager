@@ -16,6 +16,9 @@ ja:
         email: メールアドレス
         password: パスワード
         password_confirmation: 確認用パスワード
+      label:
+        label_name: ラベル名
+        color: ラベル色
   helpers:
     submit:
       create: 登録する
