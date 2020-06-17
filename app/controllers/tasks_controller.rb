@@ -64,14 +64,15 @@ class TasksController < ApplicationController
 
   def set_tasks
     if logged_in?
+      # 完了を表示するかどうかで対象のタスクを絞る
       if params[:hide_completed].present?
         @task_searched = current_user.tasks.hide_completed(params[:hide_completed])
       else
         @task_searched = current_user.tasks
       end
-      # 最初に検索済みかどうかで対象のタスクを絞る
+      # 検索しているか、していたら条件は何かによって対象のタスクを絞る
       if params[:search].present?
-        @task_searched = @task_searched.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority])
+        @task_searched = @task_searched.what_content(params[:content]).what_status(params[:status]).what_priority(params[:priority]).what_label(params[:label_id])
       else
         @task_searched = @task_searched.all
       end

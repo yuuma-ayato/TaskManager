@@ -3,7 +3,9 @@
     <%= form_with(method: :get, local:true, url:tasks_path) do |form| %>
       <p><%= form.label :content,"内容" %></p>
       <p><%= form.text_field :content, class:"form" %> </p>
-      <p class="status_search_form dropdown_original"><%= form.label :status, "ステータス" %><%= form.select :status, Task.statuses.keys, include_blank: true %>  <%= form.label :priority, "優先順位" %><%= form.select :priority, Task.priorities.keys, include_blank: true %></p>
+      <p class="status_search_form dropdown_original"><%= form.label :status, "ステータス" %><%= form.select :status, Task.statuses.keys, include_blank: true %>
+          <%= form.label :priority, "優先順位" %><%= form.select :priority, Task.priorities.keys, include_blank: true %></p>
+      <p>ラベル:<%= form.select :label_id, Label.all.collect {|l| [l.label_name, l.id] }, include_blank: true %></p>
       <%= form.hidden_field :search, value: "true" %>
       <%= form.hidden_field :hide_completed, value:params[:hide_completed] %>
       <%= form.hidden_field :sort, value:params[:sort] %>

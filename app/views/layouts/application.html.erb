@@ -32,10 +32,10 @@
                 Sort
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                <%= link_to '作成日時', tasks_path(hide_completed:params[:hide_completed],search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item" %>
-                <%= link_to '終了期限', tasks_path(sort: "limit_desc",hide_completed:params[:hide_completed], search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_limit" %>
-                <%= link_to 'ステータス', tasks_path(sort: "status_asc",hide_completed:params[:hide_completed],search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_status" %>
-                <%= link_to '優先順位', tasks_path(sort: "priority_desc",hide_completed:params[:hide_completed],search:params[:search],content:params[:content],status:params[:status],priority:params[:priority]), class:"dropdown-item sort_priority" %>
+                <%= link_to '作成日時', tasks_path(hide_completed:params[:hide_completed],search:params[:search],content:params[:content],status:params[:status],priority:params[:priority],label_id:params[:label_id]), class:"dropdown-item" %>
+                <%= link_to '終了期限', tasks_path(sort: "limit_desc",hide_completed:params[:hide_completed], search:params[:search],content:params[:content],status:params[:status],priority:params[:priority],label_id:params[:label_id]), class:"dropdown-item sort_limit" %>
+                <%= link_to 'ステータス', tasks_path(sort: "status_asc",hide_completed:params[:hide_completed],search:params[:search],content:params[:content],status:params[:status],priority:params[:priority],label_id:params[:label_id]), class:"dropdown-item sort_status" %>
+                <%= link_to '優先順位', tasks_path(sort: "priority_desc",hide_completed:params[:hide_completed],search:params[:search],content:params[:content],status:params[:status],priority:params[:priority],label_id:params[:label_id]), class:"dropdown-item sort_priority" %>
               </div>
             </li>
           </div>
