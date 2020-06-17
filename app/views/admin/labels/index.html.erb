@@ -1,8 +1,18 @@
 <div class="container">
+  <% flash.each do |key, value| %>
+  <%= content_tag :div, value, class: "flash time-limit flash-#{key}" %>
+  <% end %>
+  <script>
+  $( document ).ready(function() {
+    // メッセージを2秒後にフェードアウトする
+    $('.time-limit').fadeOut(2000);
+  });
+  </script>
   <p>ラベル管理画面</p>
   <p><%= link_to "ラベルを作成する", new_admin_label_path %></p>
   <p>ラベル一覧</p>
   <% @labels.each do |label| %>
   <span class="label" style="background-color:<%= label.color_before_type_cast %>"><%= label.label_name %></span>
+   <%= link_to "編集", edit_admin_label_path(label.id) %> <%= link_to "削除", admin_label_path(label.id), method: :delete %>
   <% end %>
 </div>
