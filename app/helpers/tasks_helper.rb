@@ -19,4 +19,8 @@ module TasksHelper
       "waiting"
     end
   end
+
+  def select_label(label)
+    true if @task.labels.include?(label)
+  end
 end

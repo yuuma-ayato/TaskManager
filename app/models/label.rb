@@ -3,6 +3,6 @@ class Label < ApplicationRecord
                 緑: "#3cb371", オレンジ: "#ff8c00", 紫: "#ba55d3", 茶色: "#8b4513"}
   validates :label_name, presence: true, uniqueness: true, length: { maximum: 10 }
   validates :color, length: { maximum: 7 }
-  has_many :task_labels
+  has_many :task_labels, dependent: :destroy
   has_many :tasks, through: :task_labels, source: :task
 end

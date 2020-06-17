@@ -223,6 +223,14 @@ footer {
   text-align: center;
 }
 
+input[type="checkbox"] {
+  display: none;
+}
+
+input[type="checkbox"]:checked + label {
+  border: 3px solid rgb(150, 255, 0);
+}
+
 .label {
   color: white;
   padding: 5px;

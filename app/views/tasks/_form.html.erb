@@ -15,11 +15,15 @@
       <p><%= form.label :limit %></p>
       <% if controller.action_name == "edit" || controller.action_name == "update" %>
         <p class="dropdown_original"><%= form.datetime_select :limit, include_blank: true, start_year: Date.today.year, minute_step: 5, selected: @task.limit %></p>
-        <%= form.submit class: "btn btn-primary" %>
       <% else %>
         <p class="dropdown_original"><%= form.datetime_select :limit, include_blank: true, start_year: Date.today.year, minute_step: 5, selected: Date.today %></p>
-        <%= form.submit class: "btn btn-primary" %>
       <% end %>
+      <p>ラベルを選択</p>
+      <% Label.all.each_with_index do |label,i| %>
+        <%= form.check_box :label_ids, { multiple:true, checked: select_label(label), disabled: label[:disabled], include_hidden: false, id:"label_check#{i}"}, label[:id] %>
+        <label class="label" for="label_check<%= i %>" style="background-color:<%= label.color_before_type_cast %>"><%= label.label_name %></label>
+      <% end %>
+      <p><%= form.submit class: "btn btn-primary" %></p>
     <% end %>
   </div>
 </div>

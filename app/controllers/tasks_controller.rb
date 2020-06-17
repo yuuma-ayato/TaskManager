@@ -31,6 +31,9 @@ class TasksController < ApplicationController
 
   def update
     set_tasks
+    unless params[:task][:label_ids]
+      @task.task_labels.delete_all
+    end
     respond_to do |format|
       if @task.update(get_task_params)
         flash.now[:notice] = "タスクを編集しました"
@@ -56,7 +59,7 @@ class TasksController < ApplicationController
   end
 
   def get_task_params
-    params.require(:task).permit(:content,:detail,:limit,:status,:priority).merge(user_id:current_user.id)
+    params.require(:task).permit(:content,:detail,:limit,:status,:priority,label_ids: []).merge(user_id:current_user.id)
   end
 
   def set_tasks
