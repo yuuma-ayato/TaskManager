@@ -6,5 +6,11 @@
     <% if @task.limit %>
       <p class="show_limit">終了期限:<%= l @task.limit, format: :long %></p>
     <% end %>
+    <% if @task.labels.any? %>
+      <p>このタスクに付けられたラベル</p>
+      <% @task.labels.each do |label| %>
+        <span class="label" style="background-color:<%= label.color_before_type_cast %>"><%= label.label_name %></span>
+      <% end %>
+    <% end %>
   </div>
 </div>

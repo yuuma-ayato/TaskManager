@@ -109,6 +109,7 @@ header {
 .modal-content {
   padding: 10px;
   text-align: center;
+  display: block;
 }
 
 .modal-dialog {
@@ -226,4 +227,5 @@ footer {
   color: white;
   padding: 5px;
   border-radius: 5px;
+  display: inline-block;
 }
