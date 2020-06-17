@@ -6,4 +6,6 @@ class Task < ApplicationRecord
   validates :content, presence: true, length: { maximum: 50 }
   validates :detail, length: { maximum: 255 }
   belongs_to :user
+  has_many :task_labels
+  has_many :labels, through: :task_labels, source: :label
 end
