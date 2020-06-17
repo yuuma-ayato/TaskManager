@@ -39,7 +39,7 @@ belongs_to :label
 ## labelsテーブル
 |Column|Type|Options|
 |------|----|-------|
-|label_name|string|null: false, unique: true|
+|label_name|string|null: false, unique: true, limit: 10|
 |color|string|null:false, default: "#ffffff"|
 ### Association
 has_many :tasks, through :tasks_labels
