@@ -3,6 +3,6 @@
   <p><%= link_to "ラベルを作成する", new_admin_label_path %></p>
   <p>ラベル一覧</p>
   <% @labels.each do |label| %>
-  <%= label.label_name %>
+  <span class="label" style="background-color:<%= label.color %>"><%= label.label_name %></span>
   <% end %>
 </div>
