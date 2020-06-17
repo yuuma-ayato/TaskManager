@@ -1,4 +1,5 @@
 class Admin::UsersController < ApplicationController
+  include Common
   before_action :set_user, only: %i(show edit update destroy)
   before_action :admin_only
 
@@ -52,12 +53,5 @@ class Admin::UsersController < ApplicationController
 
   def set_user
     @user = User.find(params[:id])
-  end
-
-  def admin_only
-    unless current_user && current_user.admin == true
-      redirect_to tasks_path
-      flash[:notice] = "あなたは管理者ではありません"
-    end
   end
 end

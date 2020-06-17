@@ -1,0 +1,10 @@
+<div class="container">
+  <p>ラベルを作成する</p>
+  <%= form_with(model:@label, url:admin_labels_path, local:true) do |form| %>
+    <%= form.label :label_name %>
+    <%= form.text_field :label_name %>
+    <%= form.label :color %>
+    <%= form.color_field :color %>
+    <%= form.submit %>
+  <% end %>
+</div>
