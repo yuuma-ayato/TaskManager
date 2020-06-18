@@ -32,6 +32,22 @@ FactoryBot.define do
     priority { 2 }
     user { User.first }
   end
+  factory :task4, class: Task do
+    content { 'デフォルトの内容4' }
+    detail { 'デフォルトの詳細4' }
+    limit { DateTime.new(2020,11,15,00,00,00) }
+    status { 0 }
+    priority { 0 }
+    user { User.first }
+  end
+  factory :task5, class: Task do
+    content { 'デフォルトの内容5' }
+    detail { 'デフォルトの詳細5' }
+    limit { DateTime.new(2020,11,15,00,00,00) }
+    status { 1 }
+    priority { 1 }
+    user { User.first }
+  end
 end
 
 RSpec.describe 'Tasks', type: :system do
@@ -46,8 +62,9 @@ RSpec.describe 'Tasks', type: :system do
     # タスク一覧ページに遷移
     visit tasks_path
     # ログインする
-    click_link 'LogIn'
     sleep 0.5
+    click_link 'LogIn'
+    sleep 1
     fill_in 'Email', with: 'test_user@test.com'
     fill_in 'Password', with: 'password'
     click_button 'Log in'
@@ -131,7 +148,7 @@ RSpec.describe 'Tasks', type: :system do
         it '内容とステータスと優先順位で検索できる' do
           visit tasks_path
           click_link 'Search'
-          sleep 0.5
+          sleep 0.3
           fill_in '内容', with: 'デフォルトの内容1'
           within '.status_search_form' do
             select '未着手'
@@ -140,6 +157,21 @@ RSpec.describe 'Tasks', type: :system do
           click_button '検索'
           expect(page).to have_content 'デフォルトの内容1'
           expect(page).not_to have_content 'デフォルトの内容2'
+        end
+        it 'ラベルで検索できる' do
+          task1 = FactoryBot.create(:task4)
+          task2 = FactoryBot.create(:task5)
+          task1.labels.create(label_name:"ラベル1",color:"赤")
+          task2.labels.create(label_name:"ラベル2",color:"青")
+          visit tasks_path
+          click_link 'Search'
+          sleep 0.5
+          within '.label_search_form' do
+            select 'ラベル1'
+          end
+          click_button '検索'
+          expect(page).to have_content 'デフォルトの内容4'
+          expect(page).not_to have_content 'デフォルトの内容5'
         end
       end
   end
@@ -184,7 +216,20 @@ RSpec.describe 'Tasks', type: :system do
           expect(page).to have_content 'デフォルトの内容1'
           expect(page).to have_content 'デフォルトの詳細1'
         end
-       end
-     end
+      end
+      it 'タスクに紐付いているラベルが表示される'do
+        task = FactoryBot.create(:task4)
+        task.labels.create(label_name:"ラベル1",color:"赤")
+        task.labels.create(label_name:"ラベル2",color:"青")
+        visit tasks_path
+        click_link 'デフォルトの内容4'
+        # 詳細ウィンドウ内の検証
+        within('.modal') do
+          # 詳細ウィンドウに該当タスクのcontent,detailがhave_contentされているかを確認する
+          expect(page).to have_content 'ラベル1'
+          expect(page).to have_content 'ラベル2'
+        end
+      end
+    end
   end
 end
